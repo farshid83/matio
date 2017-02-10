@@ -410,6 +410,16 @@ test_mat_LDFLAGS = $(TEST_LFLAGS)
 
 test_snprintf_SOURCES = test_snprintf.c
 
+if ENABLE_FORTRAN
+noinst_PROGRAMS += test_matf
+
+test_matf_SOURCES = test_matf.f90
+test_matf_CFLAGS  = -I$(top_builddir)/src -I$(top_builddir)/src/fortran
+test_matf_FCFLAGS = -I$(top_builddir)/src -I$(top_builddir)/src/fortran
+test_matf_LDFLAGS = -L$(top_builddir)/src -L$(top_builddir)/src/fortran
+test_matf_LDADD   = $(TEST_LIBS)
+endif
+
 atconfig: $(top_builddir)/config.status
 	cd $(top_builddir) && ./config.status tests/$@
 
